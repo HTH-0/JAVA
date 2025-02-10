@@ -34,7 +34,7 @@ public class BASEBALL {
 
 			System.out.println("\n⚾ 게임 시작 ⚾\n");
 
-			System.out.println("정답: " + Arrays.toString(Goal)); // 정답 확인용
+//			System.out.println("정답: " + Arrays.toString(Goal)); // 에러 확인용
 
 			// 9번의 기회가 주어지는 게임 시작
 			for (int i = 1; i <= Chance; i++) {
