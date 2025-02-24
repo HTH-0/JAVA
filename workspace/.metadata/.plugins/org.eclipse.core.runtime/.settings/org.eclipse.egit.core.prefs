@@ -1,3 +1,5 @@
-GitRepositoriesView.GitDirectories=C\:\\Users\\Administrator\\Downloads\\Eclipse\\\uC678\uBD80\uC790\uB8CC\\06_JAVA\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\Administrator\\Downloads\\Eclipse\\\uC678\uBD80\uC790\uB8CC\\06_JAVA\\.git;
+GitRepositoriesView.GitDirectories=C\:\\Users\\Administrator\\Downloads\\Eclipse\\\uC678\uBD80\uC790\uB8CC\\06_JAVA\\.git;C\:\\Users\\Administrator\\Downloads\\Eclipse\\eclipse\\JAVA\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\Administrator\\Downloads\\Eclipse\\\uC678\uBD80\uC790\uB8CC\\06_JAVA\\.git;C\:\\Users\\Administrator\\Downloads\\Eclipse\\eclipse\\JAVA\\.git;
+RepositoryGroups.uuids=
+core_ssh_default_agent=\\\\.\\pageant
 eclipse.preferences.version=1

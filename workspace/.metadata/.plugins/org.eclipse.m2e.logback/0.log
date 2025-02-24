@@ -9,3 +9,5 @@
 2025-02-24 11:29:25,002 [qtp1233457180-827] INFO  o.e.j.e.nested.ContextHandler._help - Warning: No org.apache.tomcat.JarScanner set in ServletContext. Falling back to default JarScanner implementation.
 2025-02-24 11:56:44,329 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@4dd49f7d{STOPPING}[12.0.15,sto=0]
 2025-02-24 11:56:44,332 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@15dbf111{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-02-24 11:58:00,474 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-02-24 12:46:36,443 [main] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\Administrator\git\06_JAVA\.git]
