@@ -10,9 +10,11 @@
 		<item value="https://github.com/STD-INFO-COMPUTING-WEB-2024-12-25/06_JAVA.git"/>
 	</list>
 	<list key="CommitDialog.authorValues">
+		<item value="HTH-0 &lt;xogud1793@naver.com&gt;"/>
 		<item value="Administrator &lt;Administrator@DESKTOP-FU2AS1G&gt;"/>
 	</list>
 	<list key="CommitDialog.committerValues">
+		<item value="HTH-0 &lt;xogud1793@naver.com&gt;"/>
 		<item value="Administrator &lt;Administrator@DESKTOP-FU2AS1G&gt;"/>
 	</list>
 	<section name="GitImportWizard">
@@ -33,8 +35,8 @@
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
 		<item key="MAIN_SASH_FORM_ORIENTATION_VERTICAL" value="false"/>
-		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="200,200"/>
-		<item key="STAGING_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="500,500"/>
+		<item key="STAGING_SASH_FORM_WEIGHT" value="500,500"/>
 		<item key="sortItemState" value="false"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
