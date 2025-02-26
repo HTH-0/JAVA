@@ -22,7 +22,7 @@ class car{
 	}
 }
 
-public class P01 {
+public class P01car {
 	public static void main(String[] args) {
 		
 		car car1 = new car("현대", 0);

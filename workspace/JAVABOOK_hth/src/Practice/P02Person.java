@@ -18,7 +18,7 @@ class person {
 	
 }
 
-public class P02 {
+public class P02Person {
 	public static void main(String[] args) {
 		
 		person p1 = new person("홍길동", 22);
