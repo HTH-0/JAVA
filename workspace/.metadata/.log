@@ -3761,3 +3761,54 @@ java.lang.Exception: A resource exists with a different case: '/JAVABOOK_hth/src
 	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2482)
 	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:89)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:124)
+
+!ENTRY org.eclipse.egit.core 4 0 2025-02-26 11:04:53.078
+!MESSAGE An exception occurred during push on URI https://github.com/HTH-0/JAVA.git: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+!STACK 0
+org.eclipse.jgit.errors.TransportException: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:701)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:636)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:540)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:140)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1533)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:269)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.egit.ui 4 0 2025-02-26 11:04:53.081
+!MESSAGE Can't connect to any repository: https://github.com/HTH-0/JAVA.git (https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/')
+
+!ENTRY org.eclipse.egit.core 4 0 2025-02-26 11:05:23.056
+!MESSAGE An exception occurred during push on URI https://github.com/HTH-0/JAVA.git: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+!STACK 0
+org.eclipse.jgit.errors.TransportException: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:701)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:636)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:540)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:140)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1533)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:269)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.egit.ui 4 0 2025-02-26 11:05:23.058
+!MESSAGE Can't connect to any repository: https://github.com/HTH-0/JAVA.git (https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/')
+
+!ENTRY org.eclipse.egit.core 4 0 2025-02-26 11:05:40.686
+!MESSAGE An exception occurred during push on URI https://github.com/HTH-0/JAVA.git: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+!STACK 0
+org.eclipse.jgit.errors.TransportException: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:701)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:636)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:540)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:140)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1533)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:269)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.egit.ui 4 0 2025-02-26 11:05:40.688
+!MESSAGE Can't connect to any repository: https://github.com/HTH-0/JAVA.git (https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/')
