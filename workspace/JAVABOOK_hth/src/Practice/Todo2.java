@@ -1,6 +1,7 @@
 package Practice;
 
 import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Todo2 {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		
+
 		Load();
 		while (true) {
 			System.out.println("\n📌 To-Do List");
@@ -36,7 +37,7 @@ public class Todo2 {
 						break;
 					}
 					TodoList.add(task);
-					Save();		// 추가 이후 저장
+					Save(); // 추가 이후 저장
 					System.out.println("추가되었습니다 (나가기 : exit)");
 				}
 				continue;
@@ -52,7 +53,7 @@ public class Todo2 {
 
 				if (num >= 0 && num < TodoList.size()) {
 					TodoList.remove(num);
-					Save();		// 삭제 이후 저장
+					Save(); // 삭제 이후 저장
 					System.out.println("삭제되었습니다");
 				} else {
 					System.out.println("번호를 다시 입력해주세요");
