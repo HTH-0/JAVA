@@ -19,10 +19,10 @@ public class Todo2 {
 			System.out.println("\n📌 To-Do List");
 			System.out.println("1. 할 일 추가");
 			System.out.println("2. 리스트 삭제");
-			System.out.println("3. 조회");
-			System.out.println("4. 종료하기");
+			System.out.println("3. 목록 조회");
+			System.out.println("4. 검색하기");
+			System.out.println("5. 종료하기");
 			System.out.print("선택 : ");
-
 			int Select = sc.nextInt();
 			sc.nextLine(); // 버퍼 비우기
 
@@ -72,10 +72,28 @@ public class Todo2 {
 				break;
 
 			// 종료
+
 			case 4:
+				System.out.println("키워드를 입력해주세요 : ");
+				String Search = sc.nextLine();
+				System.out.println("🔍 검색 결과:");
+				boolean found = false;
+				for (int i = 0; i < TodoList.size(); i++) {
+					if (TodoList.get(i).contains(Search)) {
+						System.out.println(i + 1 + ". " + TodoList.get(i));
+						found = true;
+					}
+				}
+				if (!found) {
+					System.out.println("검색 결과가 없습니다.");
+				}
+				break;
+
+			case 5:
 				System.out.println("종료합니다.");
 				sc.close();
 				return;
+
 			default:
 				System.out.println("번호를 다시 입력해주세요");
 			}
