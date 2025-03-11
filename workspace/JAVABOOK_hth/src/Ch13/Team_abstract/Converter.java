@@ -1,8 +1,8 @@
-package Ch14;
+package Ch13.Team_abstract;
 
 import java.util.Scanner;
 
-public abstract class Converter {
+public abstract class Converter{
 	   abstract protected double convert(double src); // 추상 메소드
 	   abstract protected String getSrcString(); // 추상 메소드
 	   abstract protected String getDestString(); // 추상 메소드
