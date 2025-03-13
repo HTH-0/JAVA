@@ -1,5 +1,5 @@
 package Practice;
-public class P11Downcastion {
+public class P11Downcasting {
 	public static void main(String[] args) {
 		
 		Appliance a1 = new Tv();		// 업캐스팅일 때

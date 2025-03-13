@@ -34,21 +34,20 @@ public class BackgroundBubbleService implements Runnable {
 
 				int topColor = image.getRGB(bubble.getX() + 25, bubble.getY() - 5);
 
-				// System.out.println(TAG + topColor);
 
-				if (topColor == -65536) { // 버블이 천장에 닿았어!
-					// System.out.println(TAG + "머리 부딪혔어");
-					bubble.setUp(false); // 그만 올라가
+
+				if (topColor == -65536) { 
+					bubble.setUp(false); 
 					bubble.setTopWallCrash(true);
 					bubble.pop();
 				}
 
-				if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) { // 왼쪽벽이 빨간색이면
-					// System.out.println(TAG + "왼쪽 벽에 부딪혔다!");
+				if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) { 
+
 					bubble.setLeftWallCrash(true);
 					bubble.setLeft(false);
 				} else if (rightColor.getRed() == 255 && rightColor.getGreen() == 0 && rightColor.getBlue() == 0) {
-					// System.out.println(TAG + "오른쪽 벽에 부딪혔다!");
+
 					bubble.setRightWallCrash(true);
 					bubble.setRight(false);
 				}

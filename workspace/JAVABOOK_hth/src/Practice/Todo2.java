@@ -114,9 +114,9 @@ public class Todo2 {
 	}
 
 	private static void Load() {
-		File file = new File(FILE_NAME);
-		if (file.exists()) {
-			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+		File loadData = new File(FILE_NAME);
+		if (loadData.exists()) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(loadData))) {
 				String line;
 				while ((line = reader.readLine()) != null) {
 					TodoList.add(line);

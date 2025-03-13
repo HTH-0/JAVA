@@ -53,11 +53,11 @@ public class BackgroundMapService implements Runnable {
 				}
 
 				if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) { // 왼쪽벽이 빨간색이면
-					System.out.println(TAG + "왼쪽 벽에 부딪혔다!");
+					System.out.println(TAG + "왼쪽 벽과 충돌");
 					player.setLeftWallCrash(true);
 					player.setLeft(false);
 				} else if (rightColor.getRed() == 255 && rightColor.getGreen() == 0 && rightColor.getBlue() == 0) {
-					System.out.println(TAG + "오른쪽 벽에 부딪혔다!");
+					System.out.println(TAG + "오른쪽 벽과 충돌");
 					player.setRightWallCrash(true);
 					player.setRight(false);
 				}
