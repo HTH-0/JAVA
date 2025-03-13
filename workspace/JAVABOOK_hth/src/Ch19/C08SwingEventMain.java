@@ -7,11 +7,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -29,8 +29,9 @@ class C08GUI extends JFrame implements ActionListener, KeyListener, MouseListene
 	JButton input;
 	JTextField txt1;
 	JTextArea area1;
-
+	
 	Writer out;
+	
 	C08GUI(String title) {
 		// frame
 		super(title);
@@ -48,10 +49,10 @@ class C08GUI extends JFrame implements ActionListener, KeyListener, MouseListene
 		JScrollPane scroll1 = new JScrollPane(area1);
 		scroll1.setBounds(10, 10, 250, 280);
 
-		btn1 = new JButton("저장하기");
+		btn1 = new JButton("저장하기");// 파일로저장 : btn1
 		btn1.setBounds(270, 10, 110, 30);
 
-		btn2 = new JButton("불러오기");
+		btn2 = new JButton("불러오기");// 1:1요청 : btn2
 		btn2.setBounds(270, 50, 110, 30);
 
 		btn3 = new JButton("대화기록보기");// 대화기록보기 : btn3
@@ -95,50 +96,87 @@ class C08GUI extends JFrame implements ActionListener, KeyListener, MouseListene
 			System.out.println("저장하기");
 			String contents = area1.getText();
 			
-			// 파일 탐색기 열기
+			//파일탐색기 열기
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setDialogTitle("파일 저장 위치를 선택하세요");
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			
 			File defaultDirPath = new File("C:\\IOTEST");
-			if(defaultDirPath.exists()) {
+			if(defaultDirPath.exists())
 				fileChooser.setCurrentDirectory(defaultDirPath);
-			}
 			
 			int selectedVal = fileChooser.showSaveDialog(null);
 			System.out.println("selectedVal : " + selectedVal);
 			
 			if(selectedVal == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
-				System.out.println(selectedFile);
-
+				System.out.println("selectedFile : " + selectedFile);
 				
-				// 파일 저장
-				if(!selectedFile.toString().endsWith(".txt")){
-					filePath = selectedFile.toString() + ".txt";
+				//파일확장자 추가
+				String filePath = selectedFile.toString();
+				if(!selectedFile.toString().endsWith(".txt")) {
+					filePath = selectedFile.toString()+".txt";
 				}
-				System.out.println();
+				System.out.println("filePath : " + filePath);
 				
+//				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+//				String filename = LocalDateTime.now().format(formatter);
+				
+				try {
+					out = new FileWriter(filePath);
+					out.write(contents);
+					out.flush();
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				
+				}finally {
+					try {out.close();} catch (IOException e1) {e1.printStackTrace();}
+				}
 			}
-			
-			String dirPath = "C:\\IOTEST\\";
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-			String filename = LocalDateTime.now().format(formatter);
-			
-			try {
-				out = new FileWriter(dirPath + filename + ".txt");
-				out.write(contents);
-				out.flush();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} finally {
-				try {out.close();}catch(IOException e1) {e1.printStackTrace();}
-			}
-			
-			
+					
 			
 		} else if (e.getSource() == btn2) {
+			
 			System.out.println("불러오기");
+			//파일탐색기 열기
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("파일을 선택하세요");
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		 
+			File defaultDirPath = new File("C:\\IOTEST");
+			if(defaultDirPath.exists())
+				fileChooser.setCurrentDirectory(defaultDirPath);
+			
+	
+			int selectedVal = fileChooser.showSaveDialog(null);
+			System.out.println("selectedVal : " + selectedVal);
+			if(selectedVal == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = fileChooser.getSelectedFile();
+				System.out.println("selectedFile : " + selectedFile);
+				
+				try {
+					
+					Reader fin =new FileReader(selectedFile.toString()); 
+					StringBuffer buffer = new StringBuffer();
+					while(true) {
+						int data = fin.read();
+						if(data==-1) 
+							break;
+						buffer.append((char)data);
+					}
+					area1.setText("");
+					area1.append(buffer.toString());
+					fin.close();
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
+			
+			
+			
+			
 		} else if (e.getSource() == btn3) {
 			System.out.println("대화기록보기");
 		} else if (e.getSource() == input) {
