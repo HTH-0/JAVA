@@ -9,6 +9,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="el"/>
 			<item value="image"/>
 			<item value="service"/>
 			<item value="img"/>
@@ -23,7 +24,6 @@
 			<item value="th"/>
 			<item value="clear"/>
 			<item value="bubble"/>
-			<item value="down"/>
 		</list>
 		<list key="replacehistory">
 		</list>
