@@ -9,6 +9,9 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="System.out.println(&quot;바람 속도: &quot; + ro.getWind().getSpeed() + &quot; m/s&quot;);"/>
+			<item value="get"/>
+			<item value="getsta"/>
 			<item value="el"/>
 			<item value="image"/>
 			<item value="service"/>
@@ -21,9 +24,6 @@
 			<item value="left"/>
 			<item value="this.play"/>
 			<item value="player\"/>
-			<item value="th"/>
-			<item value="clear"/>
-			<item value="bubble"/>
 		</list>
 		<list key="replacehistory">
 		</list>
