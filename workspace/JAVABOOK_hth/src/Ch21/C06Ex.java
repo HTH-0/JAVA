@@ -141,7 +141,7 @@ public class C06Ex {
 		freeConnection(pstmt);
 	}
 
-	// station을 수정하기
+	// station 수정하기
 	// Update(1,2) station 1을 station 2로 바꾸게.
 	public static void Update(String st1, String st2) throws Exception {
 		// 수정 (station)
