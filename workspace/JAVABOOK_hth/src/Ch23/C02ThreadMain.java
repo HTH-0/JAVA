@@ -35,7 +35,7 @@ public class C02ThreadMain {
 		}.start();
 		
 		for(int i = 0; i < 5; i++) {
-			System.out.println("MAIN");
+			System.out.println("MAIN`");
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
