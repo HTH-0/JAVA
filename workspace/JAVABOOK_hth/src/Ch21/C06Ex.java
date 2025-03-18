@@ -142,12 +142,17 @@ public class C06Ex {
 	}
 
 	// station 수정하기
-	// Update(1,2) station 1을 station 2로 바꾸게.
-	public static void Update(String st1, String st2) throws Exception {
+	public static void Update(ChargeStation obj) throws Exception {
 		// 수정 (station)
-		pstmt = conn.prepareStatement("UPDATE charge_station SET station = ? WHERE 지사 = ?");
-		pstmt.setString(1, st2);
-		pstmt.setString(2, st1);
+		pstmt = conn.prepareStatement("UPDATE charge_station SET `행정구역` = ?,"
+				+ "`지사` = ?, `시설명` = ?, `우편번호` = ?, `주소` = ? WHERE `순번` = ? ");
+		
+		pstmt.setString(1, obj.getSection());
+		pstmt.setString(2, obj.getStation());
+		pstmt.setString(3, obj.getName());
+		pstmt.setInt(4, obj.getZipcode());
+		pstmt.setString(5, obj.getAddress());
+		pstmt.setInt(6, obj.getNo());
 
 		int result = pstmt.executeUpdate();
 
@@ -197,9 +202,9 @@ public class C06Ex {
 	public static void main(String[] args) {
 		try {
 			connect();
-			Insert(new ChargeStation(201, "대구광역시", "대구지사", "대구가스", 10101, "대구"));
-//			Update("대구지사", "부산지사");
-//			Delete("부산지사");
+//			Insert(new ChargeStation(201, "대구광역시", "대구지사", "대구가스", 10101, "대구"));
+			Update(new ChargeStation(201, "울산광역시", "울산지사", "울산가스", 20202, "울산"));
+//			Delete("울산지사");
 			Select();
 		} catch (Exception e) {
 			e.printStackTrace();
