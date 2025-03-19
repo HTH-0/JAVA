@@ -28,6 +28,7 @@ public class C08Tx {
 			
 			
 			System.out.println("INSERT 시작..");
+			
 			conn.setAutoCommit(false);
 				
 			pstmt = conn.prepareStatement("INSERT INTO tbl_std VALUES('a', 1, 'a')");

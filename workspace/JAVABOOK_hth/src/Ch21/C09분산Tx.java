@@ -51,22 +51,22 @@ public class C09분산Tx {
         try {
             // 첫 번째 DB 트랜잭션 시작
             xaResource1.start(xid1, XAResource.TMNOFLAGS);
-            PreparedStatement pstmt1 = conn1.prepareStatement("insert into tbl_user values('a','1','1',false)");
+            PreparedStatement pstmt1 = conn1.prepareStatement("insert into tbl_user values('a','1')");
             pstmt1.executeUpdate();
-            PreparedStatement pstmt2 = conn1.prepareStatement("insert into tbl_user values('b','1','1',false)");
+            PreparedStatement pstmt2 = conn1.prepareStatement("insert into tbl_user values('b','1')");
             pstmt2.executeUpdate();
-            PreparedStatement pstmt3 = conn1.prepareStatement("insert into tbl_user values('c','1','1',false)");
+            PreparedStatement pstmt3 = conn1.prepareStatement("insert into tbl_user values('c','1')");
             pstmt3.executeUpdate();
             xaResource1.end(xid1, XAResource.TMSUCCESS);
             
 
             // 두 번째 DB 트랜잭션 시작
             xaResource2.start(xid2, XAResource.TMNOFLAGS);
-            PreparedStatement pstmt4 = conn2.prepareStatement("INSERT INTO tbl_std values('a','1')");
+            PreparedStatement pstmt4 = conn2.prepareStatement("INSERT INTO tbl_std values('a','1','a')");
             pstmt4.executeUpdate();
-            PreparedStatement pstmt5 = conn2.prepareStatement("INSERT INTO tbl_std values('b','2')");//!!!!!!!!!!!
+            PreparedStatement pstmt5 = conn2.prepareStatement("INSERT INTO tbl_std values('a','2','b')");//!!!!!!!!!!!
             pstmt5.executeUpdate();
-            PreparedStatement pstmt6 = conn2.prepareStatement("INSERT INTO tbl_std values('c','2')");
+            PreparedStatement pstmt6 = conn2.prepareStatement("INSERT INTO tbl_std values('c','2','c')");
             pstmt6.executeUpdate();
             xaResource2.end(xid2, XAResource.TMSUCCESS);
 

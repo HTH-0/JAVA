@@ -23,10 +23,12 @@ class Bank {
 		this.bankMoney = bankmoney;
 		this.account = new HashMap<>();
 	}
+
 	@Override
 	public String toString() {
 		return bankName + "은행";
 	}
+
 	// 계좌 등록 메서드
 	public void Register(String accountnumber) {
 		// 겹치지 않는 특정 형식으로 랜덤 번호를 부여하는게 좋을까?
@@ -52,14 +54,20 @@ class Bank {
 
 	// 출금 메서드
 	public void Withdraw(String accountnum, double money) {
-		if (bankMoney > money) {
-
-			account.put(accountnum, account.get(accountnum) - money);
-			bankMoney -= money;
-		} else {
+		if(!account.containsKey(accountnum)) {
+			System.out.println("존재하지 않는 계좌번호 입니다.");
+			return;
+		}
+		if(account.get(accountnum) < money) {
+			System.out.println("계좌 잔액이 부족합니다.");
+		}
+		if (bankMoney < money) {
 			System.out.println("은행 보유 금액이 부족하여 출금할 수 없습니다.");
 			return;
 		}
+		
+		account.put(accountnum, account.get(accountnum) - money);
+		bankMoney -= money;
 	}
 
 }
@@ -83,10 +91,12 @@ class Owner {
 		this.balance = balance;
 		this.account = new HashMap<>();
 	}
+
 	@Override
 	public String toString() {
 		return name;
 	}
+
 	// 계좌 등록 메서드
 	public void Register(String accountnumber, Bank bank) {
 		if (account.containsKey(accountnumber)) {
