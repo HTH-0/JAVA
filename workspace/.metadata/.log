@@ -2913,3 +2913,23 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.security 1 0 2025-03-21 11:28:09.054
+!MESSAGE New keyring password generated. 
+
+!ENTRY org.eclipse.egit.core 4 0 2025-03-21 11:28:09.474
+!MESSAGE An exception occurred during push on URI https://github.com/HTH-0/JAVA.git: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+!STACK 0
+org.eclipse.jgit.errors.TransportException: https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/'
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:702)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:637)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:541)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:140)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1557)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:269)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.egit.ui 4 0 2025-03-21 11:28:09.477
+!MESSAGE Can't connect to any repository: https://github.com/HTH-0/JAVA.git (https://github.com/HTH-0/JAVA.git: git-receive-pack not permitted on 'https://github.com/HTH-0/JAVA.git/')

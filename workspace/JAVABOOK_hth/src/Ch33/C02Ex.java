@@ -30,8 +30,9 @@ class Calc{
 			return Arrays.stream(arg)
 					.boxed()
 					.sorted((a,b) -> {return b-a;})
-					.reduce((a,b)->{return a - b;})
-					.orElse(null);
+//					.reduce((a,b)->{return a - b;})
+//					.orElse(null);
+					.reduce(0, (sub,el) -> {return sub<el?el-sub:sub-el;});
 		};
 		
 		mul = (arg)->{
