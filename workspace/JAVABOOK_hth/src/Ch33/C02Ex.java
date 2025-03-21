@@ -59,6 +59,7 @@ public class C02Ex {
 		System.out.println("합 : " + calc.sum.execute(10,20,30,40,50,60));
 		System.out.println("차 : " + calc.sub.execute(1, 4, 2, 16)); // 1, 2, 4, 16
 		System.out.println("곱 : " + calc.mul.execute(10,20,30,40,50,60));
+	
 		System.out.println("나눗셈 : " + calc.div.execute(1, 4, 2, 16));
 	}
 }
