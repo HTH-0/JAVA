@@ -15,6 +15,7 @@ public class Stage {
 		switch(stagenumber) {
 		case "Stage 1" :
 			
+			
 			break;
 		case "Stage 2" :
 			
