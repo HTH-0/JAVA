@@ -1,4 +1,4 @@
-package Ch38View.Domain.Service;
+package Ch38.Domain.Service;
 
 public class UserServiceImpl {
 

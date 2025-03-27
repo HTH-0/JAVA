@@ -1,4 +1,4 @@
-package Ch38View.Controller;
+package Ch38.Controller;
 
 public class FrontController {
 
