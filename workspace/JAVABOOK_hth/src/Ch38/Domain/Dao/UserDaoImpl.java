@@ -52,6 +52,8 @@ public class UserDaoImpl {
 			return pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
+			throw new SQLException("'UserDao' INSERT SQLEXCEPTION");
+
 		}finally {
 			try {pstmt.close();}catch(Exception e) {}
 		}
