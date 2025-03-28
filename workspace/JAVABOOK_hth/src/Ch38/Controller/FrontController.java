@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class FrontController {
 	//서브컨트롤러 저장 자료구조("/endPoint":서브컨트롤러객체)
-	private Map<String,SubController> map = new HashMap<>();
+	private Map<String,SubController> map = new HashMap();
 	
 	//싱글톤
 	private static FrontController instance;
@@ -22,10 +22,12 @@ public class FrontController {
 	private void init() {
 		// 인증요청 API(ENDPOINT : 서브컨트롤러객체 저장)
 		map.put("/user", new UserController());
+		
+		// 도서요청 API
 		map.put("/book", new BookController());
 	}
 	
-	//View로 부터 전달하는 요청 처리 
+	//View로부터 전달하는 요청 처리 
 	public Map<String,Object> execute (Map<String,Object> params)
 	{
 		System.out.println("[FC] execute invoke....");

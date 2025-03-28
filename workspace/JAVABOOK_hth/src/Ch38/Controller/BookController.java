@@ -4,141 +4,114 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Ch38.Domain.Dto.BookDto;
+import Ch38.Domain.Service.BookServiceImpl;
 
 public class BookController implements SubController {
-	Map<String, Object> response;
-	@Override
-	public Map<String, Object> execute(Map<String, Object> params) {
-
-		System.out.println("[SUB] BookController excute Invoke ..!");
-
-		response = new HashMap<>();
-		Integer serviceNo = (Integer) params.get("serviceNo");
-
-		if (serviceNo == null) {
-			response.put("status", false);
-			response.put("message", "유효하지 않은 요청입니다.");
-			return response;
-		}
+	
+	private BookServiceImpl bookService;
+	
+	
+	public BookController() {
 		try {
-			
-		switch (serviceNo) {
-		case 1:
-			System.out.println("[SUB] 회원가입 요청 확인");
-			// 01 파라미터 받기
-			String bookCode = (params.get("bookCode") != null) ? (String)params.get("bookCode") : null;
-			String bookName = (params.get("bookName") != null) ? (String)params.get("bookName") : null;
-			String publisher = (params.get("publisher") != null) ? (String)params.get("publisher") : null;
-			String isbn = (params.get("isbn") != null) ? (String)params.get("isbn") : null;
-			
-			BookDto bookDto = new BookDto(bookCode, bookName, publisher, isbn);
-			// 02 유효성 검증(Data Validation)
-			// isValid에서 true 받았나?? >> 유효성 통과했나??
-			boolean isOk = isValid(bookDto);
-			System.out.println("[회원가입] 유효성 : " + isOk);
-
-			if(isOk == false) {
-				response.put("status", false);
-				response.put("message", "유효성 체크 오류 발생");
-				return response;
-			}
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-		case 2: // R. 회원 정보 조회
-			System.out.println("[SUB] 회원 정보 조회 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 3: // U. 회원 정보 수정
-			System.out.println("[SUB] 회원 정보 수정 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 4: // D. 회원 탈퇴
-			System.out.println("[SUB] 회원 탈퇴 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 5: // Login
-			System.out.println("[SUB] Login 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 6: // Logout
-			System.out.println("[SUB] Logout 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-		default:
-			System.out.println("잘못된 번호입니다.");
-			response.put("stauts",false);
-			response.put("message","유효하지 않은 요청입니다.");
-		}
+			bookService = BookServiceImpl.getInstance();
 		}catch(Exception e) {
-			ExceptionHandler(e);
+			exceptionHandler(e);
 		}
-
-		return response;
 	}
 	
-	private boolean isValid(BookDto bookDto) {
-		
-		// bookCode는 8글자만
-		if(bookDto.getBookCode().length() != 8) {
-			response.put("error","에러메세지");
-			System.out.println("[Error] BookCode 의 길이는 8글자로 해야합니다.");
-			return false;
+	
+	Map<String, Object> response;
+	//C(1)R(2)U(3)D(4) 
+	@Override
+	public Map<String, Object> execute(Map<String, Object> params) {
+		System.out.println("[SC] BookController execute invoke..!");
+		//00 
+		response = new HashMap();
+		Integer serviceNo =(Integer)params.get("serviceNo");
+		if(serviceNo==null) {
+			response.put("status", false);
+			response.put("message", "유효하지 않은 서비스 요청입니다.");
+			return response;
 		}
-		// bookName은 255자 이하
-		if(bookDto.getBookName().length() > 255) {
-			response.put("error","에러메세지");
-			System.out.println("[Error] BookName 의 길이는 255 이하여야 합니다.");
+		switch(serviceNo) {
+			case 1:			//C - 도서등록(ROLE-사서,관리자)
+				System.out.println("[SC] 도서등록 요청 확인");
+				//01 파라미터받기
+				String bookCode = (params.get("bookCode")!=null)?(String) params.get("bookCode"):null;
+				String bookName=(params.get("bookName")!=null)?(String) params.get("bookName"):null;
+				String publisher=(params.get("publisher")!=null)?(String) params.get("publisher"):null;
+				String isbn=(params.get("isbn")!=null)?(String) params.get("isbn"):null;
+				
+				BookDto bookDto = new BookDto(bookCode,bookName,publisher,isbn);
+				if(!isValid(bookDto)){
+					response.put("status", false);
+					return response;
+				}
+				
+				//02 유효성검증(Data Validation)
+				//03 관련 서비스 실행
+				//04 뷰로 이동(or 내용전달)
+				break;
+			case 2:			//R - 도서조회(ROLE-회원,사서,관리자)
+				System.out.println("[SC] 도서조회 요청 확인");
+				//01 파라미터받기
+				//02 유효성검증(Data Validation)
+				//03 관련 서비스 실행
+				//04 뷰로 이동(or 내용전달)
+				break;
+			case 3:			//U - 도서수정(ROLE-사서,관리자)
+				System.out.println("[SC] 도서수정 수정 요청 확인");
+				//01 파라미터받기
+				//02 유효성검증(Data Validation)
+				//03 관련 서비스 실행
+				//04 뷰로 이동(or 내용전달)
+				break;
+			case 4:			//D - 도서삭제(ROLE_사서,관리자)
+				System.out.println("[SC] 도서삭제 요청 확인");
+				//01 파라미터받기
+				//02 유효성검증(Data Validation)
+				//03 관련 서비스 실행
+				//04 뷰로 이동(or 내용전달)
+				break;
+			default :
+				System.out.println("[SC] 잘못된 서비스번호 요청 확인");
+				response.put("status", false);
+				response.put("message", "잘못된 서비스번호 요청입니다.");
+		}
+
+		
+		return response;
+	}
+	//
+	private boolean isValid(BookDto bookDto) {
+//		유효성 체크(isValid) 함수 완성합니다
+//		ServiceNo  : 1
+//		bookCode 는 기본 8글자만 허용
+//		bookName 의 길이는 255자를 넘기면 안됩니다
+//
+//		필요하면 정규표현식(String.matchs("REG STRING"))
+//		이용해서 필터링 해보세요 - !
+
+		if(bookDto.getBookCode()==null || bookDto.getBookCode().length()!=8){ 
+			response.put("error","bookCode의 길이는 8자 이어야 합니다");
 			return false;
 		}
 		
 		return true;
 	}
 	
-//	예외처리 함수
-	public Map<String, Object> ExceptionHandler (Exception e){
-		if(response == null) {
-			response = new HashMap<>();
-		}
+	// 예외처리함수
+	public Map<String, Object> exceptionHandler(Exception e) {
+
+		if (response == null)
+			response = new HashMap();
+
 		response.put("status", false);
 		response.put("message", e.getMessage());
 		response.put("exception", e);
-		
+
 		return response;
 	}
+	
+
 }

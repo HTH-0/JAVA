@@ -7,19 +7,16 @@ import java.sql.SQLException;
 import Ch38.Domain.Dao.ConnectionPool.ConnectionItem;
 import Ch38.Domain.Dao.ConnectionPool.ConnectionPool;
 
-public class Dao{
-
+public abstract class Dao {
+	
 	protected PreparedStatement pstmt;
 	protected ResultSet rs;
 	
 	protected ConnectionPool connectionPool;
 	protected ConnectionItem connectionItem;
-
-
 	public Dao() throws Exception{
 		//connectionPool
-		connectionPool = ConnectionPool.getInstance();
+		connectionPool =ConnectionPool.getInstance();
 	}
-
-
+	
 }

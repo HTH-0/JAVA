@@ -43,4 +43,10 @@
     <fullyQualifiedTypeName name="Ch38.Domain.Service.BookServiceImpl"/>
     <fullyQualifiedTypeName name="Ch38.Domain.Dto.BookDto"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
+    <fullyQualifiedTypeName name="Ch38.Domain.Dao.ConnectionPool.ConnectionItem"/>
+    <fullyQualifiedTypeName name="Ch38.Domain.Dao.ConnectionPool.ConnectionPool"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="Domain.BookDAOImpl"/>
+    <fullyQualifiedTypeName name="Service.BookServiceImpl"/>
+    <fullyQualifiedTypeName name="Domain.BookDTO"/>
 </qualifiedTypeNameHistroy>

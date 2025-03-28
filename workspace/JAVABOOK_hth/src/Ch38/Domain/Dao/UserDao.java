@@ -7,17 +7,16 @@ import Ch38.Domain.Dto.UserDto;
 
 public interface UserDao {
 
-	// CRUD
 	int insert(UserDto userDto) throws Exception;
 
-	int update(UserDto userDto);
+	int update(UserDto userDto) throws SQLException;
 
-	int delete(UserDto userDto);
+	int delete(UserDto userDto) throws SQLException;
+	//단건조회
 
-	// 단건 조회
 	UserDto select(UserDto userDto);
+	//다건조회
 
-	// 다건 조회
 	List<UserDto> selectAll();
 
 }

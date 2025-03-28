@@ -12,7 +12,11 @@
 	<item key="CallHierarchyViewPart.ratio3" value="500"/>
 	<item key="CallHierarchyViewPart.orientation" value="3"/>
 	<item key="CallHierarchyViewPart.ratio1" value="500"/>
-	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Users\Administrator\Downloads\mysql-connector-j-9.2.0"/>
+	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib"/>
+	<item key="Annotations" value="true"/>
+	<item key="Replace" value="true"/>
+	<item key="Comments" value="true"/>
+	<item key="InstanceOf" value="false"/>
 	<section name="NewClassCreationWizard.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="706"/>
 		<item key="DIALOG_Y_ORIGIN" value="226"/>
@@ -204,5 +208,12 @@
 	</section>
 	<section name="ClasspathContainerSelectionPage">
 		<item key="index" value="1"/>
+	</section>
+	<section name="DialogBounds_AddDelegateMethodsDialog">
+		<item key="DIALOG_X_ORIGIN" value="688"/>
+		<item key="DIALOG_Y_ORIGIN" value="159"/>
+		<item key="DIALOG_WIDTH" value="561"/>
+		<item key="DIALOG_HEIGHT" value="554"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 </section>

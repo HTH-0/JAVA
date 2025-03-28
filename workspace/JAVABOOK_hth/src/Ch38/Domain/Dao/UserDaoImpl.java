@@ -1,7 +1,6 @@
 package Ch38.Domain.Dao;
 
-import java.sql.Connection; 
-import java.sql.DriverManager;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,86 +11,114 @@ import Ch38.Domain.Dao.ConnectionPool.ConnectionPool;
 import Ch38.Domain.Dto.UserDto;
 
 
-public class UserDaoImpl extends Dao implements UserDao {
-	
-	// DB attr
+
+public class UserDaoImpl extends Dao implements UserDao{
+	//DB Attr
 //	private Connection conn;
-//	private PreparedStatement  pstmt;
+//	private PreparedStatement pstmt;
 //	private ResultSet rs;
 //	
-//	private String id= "root";
-//	private String pw= "1234";
-//	private String url= "jdbc:mysql://localhost:3306/bookDB";
+//	private String id="root";
+//	private String pw="1234";
+//	private String url="jdbc:mysql://localhost:3306/bookDB";
 	
-	// CONNECTION POOL
+	
+	//CONNECTION POOL 
 //	private ConnectionPool connectionPool;
 //	private ConnectionItem connectionItem;
 	
-	// 싱글톤 패턴 처리
-	private static UserDao instance;	// UserDaoImpl 이 싱글톤
 	
-	// 예외 처리는 직접 하지 않고 컨트롤러로 넘긴다.
-	
+	//싱글톤 패턴처리
+	private static UserDao instance;
 	private UserDaoImpl() throws Exception {
-		System.out.println("[Dao] UserDaoImpl init..");
-//		Class.forName("com.mysql.cj.jdbc.Driver");s
-//		conn = DriverManager.getConnection(url, id, pw);
+		System.out.println("[DAO] UserDaoImpl init...");
+//		Class.forName("com.mysql.cj.jdbc.Driver");
+//		conn = DriverManager.getConnection(url,id,pw);
 //		System.out.println("UserDaoImpl DB Connection Success");
-		connectionPool = ConnectionPool.getInstance();
+//		connectionPool =ConnectionPool.getInstance();
+		
 		
 	};
 	public static UserDao getInstance() throws Exception {
-		if(instance == null) {
-			instance = new UserDaoImpl();	// 최초로 한번만
-		}
+		if(instance==null)
+			instance = new UserDaoImpl();
 		return instance;
 	}
 	
-	// CRUD
+	//CRUD 
+ 
 	@Override
 	public int insert(UserDto userDto) throws Exception {
-		String insertSQL = "INSERT INTO tbl_user VALUES(?, ?, ?, ?)";
 		try {
 			
 			connectionItem = connectionPool.getConnection();
 			Connection conn = connectionItem.getConn();
 			
-			pstmt = conn.prepareStatement(insertSQL);
-			
+			pstmt = conn.prepareStatement("insert into tbl_user values(?,?,?,?)");
 			pstmt.setString(1, userDto.getUserid());
 			pstmt.setString(2, userDto.getUsername());
 			pstmt.setString(3, userDto.getPassword());
 			pstmt.setString(4, "ROLE_USER");
 			
-			// Connection release
+			//Connection release
 			connectionPool.releaseConnection(connectionItem);
+			
 			return pstmt.executeUpdate();
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new SQLException("'UserDao' INSERT SQLEXCEPTION");
-
+			throw new SQLException("USERDAO's INSERT SQL EXCEPTION!!");
 		}finally {
-			try {pstmt.close();}catch(Exception e) {}
+			try {pstmt.close();}catch(Exception e2) {}
 		}
 	}
-
-	@Override
-	public int update(UserDto userDto) {
-		return -1;
-	} 
 	
+ 
 	@Override
-	public int delete(UserDto userDto) {
-		return -1;
-	} 
-	// 단건 조회
+	public int update(UserDto userDto) throws SQLException {
+//		try {
+//			pstmt = conn.prepareStatement("");
+//			
+//			return pstmt.executeUpdate();
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			throw new SQLException("USERDAO's UPDATE SQL EXCEPTION!!");
+//		}finally {
+//			try {pstmt.close();}catch(Exception e2) {}
+//		}
+		return 0;
+	}
+ 
 	@Override
-	public UserDto select(UserDto userDto) {
+	public int delete(UserDto userDto) throws SQLException {
+//		try {
+//			pstmt = conn.prepareStatement("");
+//			
+//			return pstmt.executeUpdate();
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			throw new SQLException("USERDAO's DELETE SQL EXCEPTION!!");
+//		}finally {
+//			try {pstmt.close();}catch(Exception e2) {}
+//		}
+		return 0;
+	}
+	//단건조회
+ 
+	@Override
+	public UserDto select(UserDto userDto) {	
 		return null;
-	} 
-	// 다건 조회
+	}
+	//다건조회
+ 
 	@Override
-	public List<UserDto> selectAll() {
+	public List<UserDto> selectAll() {	
 		return null;
-	} 
+	}	
+	
 }
+
+
+
