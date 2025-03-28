@@ -2,11 +2,12 @@ package Ch38.Domain.Service;
 
 import java.sql.SQLException;
 
+import Ch38.Domain.Dao.BookDao;
 import Ch38.Domain.Dao.BookDaoImpl;
 import Ch38.Domain.Dto.BookDto;
 
 public class BookServiceImpl {
-	private BookDaoImpl bookDao;
+	private BookDao bookDao;
 	
 	
 	// SingleTon
@@ -23,7 +24,7 @@ public class BookServiceImpl {
 		return instance;
 	}
 	
-	public boolean bookJoin(BookDto bookDto) throws SQLException {
+	public boolean bookJoin(BookDto bookDto) throws Exception {
 		return bookDao.insert(bookDto) > 0;
 	}
 	

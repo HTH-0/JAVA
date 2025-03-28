@@ -34,11 +34,13 @@
     <fullyQualifiedTypeName name="Ch38View.Domain.Dto.UserDto"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="Ch38.Domain.Dao.BookDaoImpl"/>
     <fullyQualifiedTypeName name="Ch38.Controller.FrontController"/>
-    <fullyQualifiedTypeName name="Ch38.Domain.Dto.BookDto"/>
     <fullyQualifiedTypeName name="Ch38.Domain.Dao.UserDaoImpl"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
     <fullyQualifiedTypeName name="Ch38.Domain.Dto.UserDto"/>
     <fullyQualifiedTypeName name="Ch38.Domain.Service.UserServiceImpl"/>
+    <fullyQualifiedTypeName name="Ch38.Domain.Dao.BookDaoImpl"/>
+    <fullyQualifiedTypeName name="Ch38.Domain.Service.BookServiceImpl"/>
+    <fullyQualifiedTypeName name="Ch38.Domain.Dto.BookDto"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
 </qualifiedTypeNameHistroy>

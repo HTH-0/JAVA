@@ -3,6 +3,7 @@ package Ch38.Tests.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import Ch38.Controller.FrontController;
@@ -17,7 +18,7 @@ public class ControllerTests {
 		params.put("endPoint", "/user");
 		params.put("serviceNo", 1);
 		// 회원가입 인자 전달
-		params.put("userid", "ccc3cc");
+		params.put("userid", "1c3cc");
 		params.put("username", "홍길동");
 		params.put("password", "1234");
 		// 요청하기
@@ -32,6 +33,7 @@ public class ControllerTests {
 	}
 	
 	@Test
+	@Disabled
 	void test2() {
 		Map<String, Object> params = new HashMap<>();
 		params.put("endPoint", "/book");

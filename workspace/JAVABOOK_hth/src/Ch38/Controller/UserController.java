@@ -37,95 +37,95 @@ public class UserController implements SubController {
 			return response;
 		}
 		try {
-			
-		switch (serviceNo) {
-		case 1: // C. 회원가입
-			System.out.println("[SUB] 회원가입 요청 확인");
-			// 01 파라미터 받기
-			String userid = (params.get("userid") != null) ? (String) params.get("userid") : null;
-			String username = (params.get("username") != null) ? (String) params.get("username") : null;
-			String password = (params.get("password") != null) ? (String) params.get("password") : null;
-			String role = "ROLE_USER";
-			UserDto userDto = new UserDto(userid, username, password, role);
 
-			// 02 유효성 검증(Data Validation)
-			boolean isOk = isValid(userDto);
-			System.out.println("[No-1 회원가입] : 유효성 검증 확인 : " + isOk);
-			if (!isOk) {
+			switch (serviceNo) {
+			case 1: // C. 회원가입
+				System.out.println("[SUB] 회원가입 요청 확인");
+				// 01 파라미터 받기
+				String userid = (params.get("userid") != null) ? (String) params.get("userid") : null;
+				String username = (params.get("username") != null) ? (String) params.get("username") : null;
+				String password = (params.get("password") != null) ? (String) params.get("password") : null;
+				String role = "ROLE_USER";
+				UserDto userDto = new UserDto(userid, username, password, role);
+
+				// 02 유효성 검증(Data Validation)
+				boolean isOk = isValid(userDto);
+				System.out.println("[No-1 회원가입] : 유효성 검증 확인 : " + isOk);
+				if (!isOk) {
+					response.put("status", false);
+					response.put("message", "유효성 체크 오류 발생");
+					return response;
+				}
+				// 03 관련 서비스 실행
+				boolean isSuccess = userService.userJoin(userDto);
+				// 04 뷰로 이동(or 내용 전달)
+				if (isSuccess) {
+					response.put("status", isSuccess);
+					response.put("message", "회원가입 성공!");
+				}
+				break;
+
+			case 2: // R. 회원 정보 조회
+				System.out.println("[SUB] 회원 정보 조회 요청 확인");
+				// 01 파라미터 받기
+
+				// 02 유효성 검증(Data Validation)
+
+				// 03 관련 서비스 실행
+
+				// 04 뷰로 이동(or 내용 전달)
+				break;
+
+			case 3: // U. 회원 정보 수정
+				System.out.println("[SUB] 회원 정보 수정 요청 확인");
+				// 01 파라미터 받기
+
+				// 02 유효성 검증(Data Validation)
+
+				// 03 관련 서비스 실행
+
+				// 04 뷰로 이동(or 내용 전달)
+				break;
+
+			case 4: // D. 회원 탈퇴
+				System.out.println("[SUB] 회원 탈퇴 요청 확인");
+				// 01 파라미터 받기
+
+				// 02 유효성 검증(Data Validation)
+
+				// 03 관련 서비스 실행
+
+				// 04 뷰로 이동(or 내용 전달)
+				break;
+
+			case 5: // Login
+				System.out.println("[SUB] Login 요청 확인");
+				// 01 파라미터 받기
+
+				// 02 유효성 검증(Data Validation)
+
+				// 03 관련 서비스 실행
+
+				// 04 뷰로 이동(or 내용 전달)
+				break;
+
+			case 6: // Logout
+				System.out.println("[SUB] Logout 요청 확인");
+				// 01 파라미터 받기
+
+				// 02 유효성 검증(Data Validation)
+
+				// 03 관련 서비스 실행
+
+				// 04 뷰로 이동(or 내용 전달)
+				break;
+
+			default:
+				System.out.println("잘못된 서비스 번호 입니다.");
 				response.put("status", false);
-				response.put("message", "유효성 체크 오류 발생");
-				return response;
+				response.put("message", "유효하지 않은 서비스 요청입니다");
 			}
-			// 03 관련 서비스 실행
-			boolean isSuccess = userService.userJoin(userDto);
-			// 04 뷰로 이동(or 내용 전달)
-			if(isSuccess) {				
-			response.put("status", isSuccess);			
-			response.put("message", "회원가입 성공!");			
-			}
-			break;
-
-		case 2: // R. 회원 정보 조회
-			System.out.println("[SUB] 회원 정보 조회 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 3: // U. 회원 정보 수정
-			System.out.println("[SUB] 회원 정보 수정 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 4: // D. 회원 탈퇴
-			System.out.println("[SUB] 회원 탈퇴 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 5: // Login
-			System.out.println("[SUB] Login 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		case 6: // Logout
-			System.out.println("[SUB] Logout 요청 확인");
-			// 01 파라미터 받기
-
-			// 02 유효성 검증(Data Validation)
-
-			// 03 관련 서비스 실행
-
-			// 04 뷰로 이동(or 내용 전달)
-			break;
-
-		default:
-			System.out.println("잘못된 서비스 번호 입니다.");
-			response.put("status", false);
-			response.put("message", "유효하지 않은 서비스 요청입니다");
-		}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ExceptionHandler(e);
 		}
 
@@ -154,7 +154,7 @@ public class UserController implements SubController {
 
 	// 예외처리 함수
 	public Map<String, Object> ExceptionHandler(Exception e) {
-		if(response == null) {
+		if (response == null) {
 			response = new HashMap<>();
 		}
 		response.put("status", false);
