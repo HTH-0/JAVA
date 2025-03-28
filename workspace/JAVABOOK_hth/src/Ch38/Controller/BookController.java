@@ -20,7 +20,8 @@ public class BookController implements SubController {
 			response.put("message", "유효하지 않은 요청입니다.");
 			return response;
 		}
-
+		try {
+			
 		switch (serviceNo) {
 		case 1:
 			System.out.println("[SUB] 회원가입 요청 확인");
@@ -104,6 +105,9 @@ public class BookController implements SubController {
 			response.put("stauts",false);
 			response.put("message","유효하지 않은 요청입니다.");
 		}
+		}catch(Exception e) {
+			ExceptionHandler(e);
+		}
 
 		return response;
 	}
@@ -124,5 +128,17 @@ public class BookController implements SubController {
 		}
 		
 		return true;
+	}
+	
+//	예외처리 함수
+	public Map<String, Object> ExceptionHandler (Exception e){
+		if(response == null) {
+			response = new HashMap<>();
+		}
+		response.put("status", false);
+		response.put("message", e.getMessage());
+		response.put("exception", e);
+		
+		return response;
 	}
 }

@@ -28,7 +28,7 @@ public class UserServiceImpl {
 	// 회원가입 (TX처리 필요)
 	public boolean userJoin(UserDto userDto) throws SQLException{
 		return userDao.insert(userDto) > 0;
-	};
+	}
 	
 	// 회원조회
 	
