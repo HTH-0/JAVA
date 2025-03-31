@@ -2,7 +2,6 @@ INDEX VERSION 1.134+C:\hth\JAVA\workspace\.metadata\.plugins\org.eclipse.jdt.cor
 1854299776.index
 743867983.index
 3545747492.index
-3174925431.index
 2359965689.index
 1985682107.index
 3706646300.index
@@ -16,7 +15,6 @@ INDEX VERSION 1.134+C:\hth\JAVA\workspace\.metadata\.plugins\org.eclipse.jdt.cor
 3144778980.index
 2688045436.index
 2137335881.index
-4185092584.index
 3017349733.index
 3327293050.index
 4285206645.index

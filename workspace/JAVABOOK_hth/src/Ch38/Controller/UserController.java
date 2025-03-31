@@ -128,7 +128,7 @@ public class UserController implements SubController {
 	// 유효성 검사 함수
 	private boolean isValid(UserDto userDto) {
 
-		if (userDto.getUserid() == null || userDto.getUserid().length() <= 4) {
+		if (userDto.getUserid().equals("0") || userDto.getUserid().length() <= 4) {
 			response.put("error", "userid의 길이는 최소 5자이상이어야합니다");
 			System.out.println("[INVALID] userid의 길이는 최소 5자이상이어야합니다");
 			return false;
