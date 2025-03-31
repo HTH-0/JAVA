@@ -7,8 +7,8 @@ import java.util.List;
 public interface BookDAO {
 	
 	int insert(BookDTO bookDTO) throws Exception;
-	int update(BookDTO bookDTO) throws SQLException;
-	int delete(String bookCode, Connection conn) throws SQLException;
+	int update(BookDTO bookDTO) throws SQLException, Exception;
+	int delete(String bookCode) throws SQLException;
 
 	BookDTO select(BookDTO bookDTO);
 	

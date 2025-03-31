@@ -27,7 +27,7 @@ public class FrontController {
 	// View 로부터 전달 하는 요청 처리
 	public Map<String, Object> execute (Map<String, Object> params){
 		
-		System.out.println("[FC] execute invoke..");
+//		System.out.println("[FC] execute invoke..");
 		String endPoint = (String)params.get("endPoint");
 		Controller controller = map.get(endPoint);
 		

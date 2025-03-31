@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Domain.BookDTO;
@@ -22,7 +23,7 @@ public class BookController implements Controller {
 
 	@Override
 	public Map<String, Object> execute(Map<String, Object> params) {
-		System.out.println("[SC] BookController execute invoke..!");
+//		System.out.println("[SC] BookController execute invoke..!");
 		// 00
 		response = new HashMap<>();
 		Integer serviceNo = (Integer) params.get("serviceNo");
@@ -33,9 +34,9 @@ public class BookController implements Controller {
 		}
 		try {
 			switch (serviceNo) {
-			
-			case 1:
-				System.out.println("[SUB] 도서 등록 요청 확인");
+
+			case 1: {// 지역변수용 중괄호
+				System.out.println("[C] 도서 등록 요청 확인");
 
 				// 파라미터 받기
 				String book_code = (params.get("BOOK_CODE") != null) ? (String) params.get("BOOK_CODE") : null;
@@ -46,40 +47,102 @@ public class BookController implements Controller {
 				String book_name = (params.get("BOOK_NAME") != null) ? (String) params.get("BOOK_NAME") : null;
 				String publisher = (params.get("PUBLISHER") != null) ? (String) params.get("PUBLISHER") : null;
 				String isreserve = (params.get("ISRESERVE") != null) ? (String) params.get("ISRESERVE") : null;
-				BookDTO bookDTO = new BookDTO(book_code, classification_id, book_author, book_name, publisher,isreserve);
-				
+				BookDTO bookDTO = new BookDTO(book_code, classification_id, book_author, book_name, publisher,
+						isreserve);
+
 				// 유효성 검증
 				boolean isOk = isValid(bookDTO);
-				System.out.println("[No-1 회원가입] : 유효성 검증 확인 : " + isOk);
-						
+//				System.out.println("[No-1 회원가입] : 유효성 검증 확인 : " + isOk);
+
 				if (!isOk) {
 					response.put("status", false);
 					return response;
 				}
-				
+
 				// 관련 서비스 실행
 				boolean isSuccess = bookService.bookJoin(bookDTO);
 				if (isSuccess) {
 					response.put("status", isSuccess);
-					response.put("message", "회원가입 성공");
+//					response.put("message", "회원가입 성공");
 				}
+			}
+				break;
 
-				break;
-				
 			case 2:
-				System.out.println();
+			{
+				System.out.println("[C] 도서 정보 수정 요청 확인");
+				String book_code = (String) params.get("BOOK_CODE");
+				String classification_id = (String) params.get("CLASSIFICATION_ID");
+				String book_author = (String) params.get("BOOK_AUTHOR");
+				String book_name = (String) params.get("BOOK_NAME");
+				String publisher = (String) params.get("PUBLISHER");
+				String isreserve = (String) params.get("ISRESERVE");
+
+				BookDTO updateDTO = new BookDTO(book_code, classification_id, book_author, book_name, publisher,
+						isreserve);
+				boolean valid = isValid(updateDTO);
+			    if (!valid) {
+			        response.put("status", false);
+			        return response;
+			    }
+
+			    boolean updateSuccess = bookService.bookUpdate(updateDTO);
+
+			    if (updateSuccess) {
+			        response.put("status", true);
+			        response.put("message", "도서 수정 성공");
+			    } else {
+			        response.put("status", false);
+			        response.put("message", "도서 수정 실패");
+			    }
 				break;
-			
+			}
 			case 3:
-				System.out.println();
-				break;
-				
+			{
+				System.out.println("[C] 도서 정보 조회 요청 확인");
+			    String book_code = (String) params.get("BOOK_CODE");
+
+			    BookDTO selectDTO = new BookDTO();
+			    selectDTO.setBOOK_CODE(book_code);
+
+			    boolean valid = isValid(selectDTO);
+			    if (!valid) {
+			        response.put("status", false);
+			        return response;
+			    }
+
+			    // bookService가 BookDTO를 리턴하게 수정
+			    BookDTO resultDTO = bookService.bookSelect(book_code);
+
+			    if (resultDTO != null) {
+			        response.put("status", true);
+			        response.put("book", resultDTO); // Viewer에서 출력할 수 있도록
+			    } else {
+			        response.put("status", false);
+			        response.put("message", "해당 도서를 찾을 수 없습니다.");
+			    }
+
+			    break;
+			}
 			case 4:
-				System.out.println();
-				break;
-				
+			{
+			    System.out.println("[C] 도서 전체 조회 요청 확인");
+
+			    List<BookDTO> book_code = bookService.bookSelectAll();
+
+			    if (book_code != null && !book_code.isEmpty()) {
+			        response.put("status", true);
+			        response.put("book_code", book_code); // Viewer에서 사용
+			    } else {
+			        response.put("status", false);
+			        response.put("message", "등록된 도서가 없습니다.");
+			    }
+
+			    break;
+			}
+
 			case 5:
-				System.out.println("[SUB] 도서 삭제 요청 확인");
+				System.out.println("[C] 도서 삭제 요청 확인");
 				// 삭제할 도서 코드 받기
 				String deleteBookCode = (params.get("BOOK_CODE") != null) ? (String) params.get("BOOK_CODE") : null;
 
@@ -100,41 +163,51 @@ public class BookController implements Controller {
 					response.put("message", "도서 삭제 실패");
 				}
 				break;
-				
+
 			default:
 				System.out.println("[SC] 잘못된 번호입니다.");
 				response.put("status", false);
 				response.put("message", "잘못된 번호입니다.");
 			}
-			
+
 		} catch (Exception e) {
 			exceptionHandler(e);
 		}
 		return response;
 	}
-	
-	
+
 	// 유효성 검사를 위한 메서드
 	private boolean isValid(BookDTO bookDTO) {
-		
-		if(bookDTO.getBOOK_CODE() == null || bookDTO.getBOOK_CODE().length() <= 5 ) {
-			response.put("ERROR", "북 코드는 5자 이상으로 만들어야합니다");
+		if (bookDTO.getBOOK_CODE() == null || bookDTO.getBOOK_CODE().length() <= 5) {
+			response.put("ERROR", "BOOK_CODE는 5자 이상이어야 합니다.");
 			return false;
 		}
+
+		// ISRESERVE 유효성 검사 (숫자 0 또는 1만 허용)
+		try {
+			int isreserve = Integer.parseInt(bookDTO.getISRESERVE());
+			if (isreserve != 0 && isreserve != 1) {
+				response.put("ERROR", "ISRESERVE는 0 또는 1이어야 합니다.");
+				return false;
+			}
+		} catch (NumberFormatException e) {
+			response.put("ERROR", "ISRESERVE는 숫자 형식이어야 합니다.");
+			return false;
+		}
+
 		return true;
 	}
 	
-	
+
 	// 예외 처리를 위한 메서드
-	public Map<String, Object> exceptionHandler(Exception e){
-		if(response == null) {
+	public Map<String, Object> exceptionHandler(Exception e) {
+		if (response == null) {
 			response = new HashMap<>();
 		}
 		response.put("status", false);
 		response.put("message", e.getMessage());
 		response.put("exception", e);
-	
-		
+
 		return response;
 	}
 }
