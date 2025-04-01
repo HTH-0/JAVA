@@ -9,79 +9,85 @@ import Controller.FrontController;
 import Domain.BookDTO;
 
 public class Viewer {
-	// 사용자의 상태정보
-	private String userid; // UserId
-	private String username; // Username
-	private String role;
 
 	private Scanner sc = new Scanner(System.in);
 
 	private FrontController controller;
 
-	Viewer() throws Exception {
+	public Viewer() throws Exception {
 		controller = FrontController.getInstance();
 	}
 
 	public void MainMenu() {
+		boolean isRunning = true;
 
-		while (true) {
+		while (isRunning) {
 			System.out.println("------------M E N U--------------");
 			System.out.println("1 Book_Tbl");
 			System.out.println("2 Member_Tbl");
 			System.out.println("3 Rental_Tbl");
 			System.out.println("4 Exit");
+			System.out.println("------------M E N U--------------");
 			System.out.print("번호 : ");
 			int num = sc.nextInt();
 
-			if (num == 4)
+			if (num == 4) {
+				System.out.println("시스템을 종료합니다.");
 				break; // 종료 조건
+			}
+			if (num == 2 || num == 3) {
+				System.err.println("1번을 선택해주세요.");
+			}
+			if (num != 1 && num != 2 && num != 3) {
+				System.err.println("다시 입력해주세요");
+				continue; // 메뉴 처음으로 다시
+			}
+			if (num == 1) {
+				boolean isSubRunning = true;
+				while (isSubRunning) { // Book_Tbl 서브 메뉴 루프
+					System.out.println("------------B O O K--------------");
+					System.out.println("1 Insert");
+					System.out.println("2 Update");
+					System.out.println("3 Select");
+					System.out.println("4 SelectAll");
+					System.out.println("5 Delete");
+					System.out.println("6 Prev");
+					System.out.println("------------B O O K--------------");
+					System.out.print("번호 : ");
+					int subNum = sc.nextInt();
 
-//			if (num != 1) {
-//				System.out.println("다시 입력해주세요");
-//				continue; // 메뉴 처음으로 다시
-//			}
+					switch (subNum) {
+					case 1:
+						// insert 메서드
+						Insert();
+						break;
+					case 2:
+						// update 메서드
+						Update();
+						break;
+					case 3:
+						// Select 메서드
+						Select();
+						break;
+					case 4:
+						// selectAll 메서드
+						SelectAll();
+						break;
+					case 5:
+						// delete 메서드
+						Delete();
+						break;
+					case 6:
+						// 서브메뉴 종료 → 메인 메뉴로 돌아감
+						System.out.println("메인 메뉴로 돌아갑니다.");
+						break;
+					default:
+						System.err.println("다시 입력해주세요.");
+					}
 
-			while (true) { // Book_Tbl 서브 메뉴 루프
-				System.out.println("1 Insert");
-				System.out.println("2 Update");
-				System.out.println("3 Select");
-				System.out.println("4 SelectAll");
-				System.out.println("5 Delete");
-				System.out.println("6 Prev");
-				System.out.print("번호 : ");
-				int subNum = sc.nextInt();
-
-				switch (subNum) {
-				case 1:
-					// insert 메서드
-					Insert();
-					break;
-				case 2:
-					// update 메서드
-					Update();
-					break;
-				case 3:
-					// Select 메서드
-					Select();
-					break;
-				case 4:
-					// selectAll 메서드
-					SelectAll();
-					break;
-				case 5:
-					// delete 메서드
-					Delete();
-					break;
-				case 6:
-					// 서브메뉴 종료 → 메인 메뉴로 돌아감
-					System.out.println("메인 메뉴로 돌아갑니다.");
-					break;
-				default:
-					System.out.println("다시 입력해주세요.");
+					if (subNum == 6)
+						break; // 내부 while 탈출
 				}
-
-				if (subNum == 6)
-					break; // 내부 while 탈출
 			}
 		}
 
@@ -99,7 +105,7 @@ public class Viewer {
 		String book_name = sc.next();
 		System.out.print("PUBLISHER : ");
 		String publisher = sc.next();
-		System.out.print("ISRESERVE : ");
+		System.out.print("ISRESERVE (0: 미예약, 1: 예약됨) : ");
 		String isreserve = sc.next();
 
 		// 요청처리
@@ -122,8 +128,10 @@ public class Viewer {
 
 	public void Update() {
 		System.out.println("------------UPDATE--------------");
+		System.out.println("바꾸고 싶은 북코드를 입력해주세요.");
 		System.out.print("BOOK_CODE : ");
 		String book_code = sc.next();
+		System.out.println("변경 하실 값을 입력해주세요.");
 		System.out.print("CLASSIFICATION_ID : ");
 		String classification_id = sc.next();
 		System.out.print("BOOK_AUTHOR : ");
@@ -132,7 +140,7 @@ public class Viewer {
 		String book_name = sc.next();
 		System.out.print("PUBLISHER : ");
 		String publisher = sc.next();
-		System.out.print("ISRESERVE : ");
+		System.out.print("ISRESERVE (0: 미예약, 1: 예약됨) : ");
 		String isreserve = sc.next();
 
 		// 요청처리
@@ -167,7 +175,7 @@ public class Viewer {
 	}
 
 	public void SelectAll() {
-		System.out.println("------------SELECTALL--------------");
+		System.out.println("------------SELECT ALL--------------");
 
 		// 요청 생성
 		Map<String, Object> params = new HashMap<>();
@@ -176,7 +184,15 @@ public class Viewer {
 
 		// 컨트롤러 호출
 		Map<String, Object> response = controller.execute(params);
-
+		
+		// 추가: 오류 메시지가 있을 경우 출력
+		if (response.containsKey("message")) {
+		    System.out.println("결과: " + response.get("message"));
+		}
+		if (response.containsKey("ERROR")) {
+		    System.err.println("오류: " + response.get("ERROR"));
+		}
+		
 		// 결과 처리
 		Object statusObj = response.get("status");
 		if (statusObj instanceof Boolean && (Boolean) statusObj) {
@@ -222,5 +238,6 @@ public class Viewer {
 			System.out.println(key + " : " + response.get(key));
 
 	}
+	
 
 }

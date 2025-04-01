@@ -23,7 +23,6 @@ public class BookController implements Controller {
 
 	@Override
 	public Map<String, Object> execute(Map<String, Object> params) {
-//		System.out.println("[SC] BookController execute invoke..!");
 		// 00
 		response = new HashMap<>();
 		Integer serviceNo = (Integer) params.get("serviceNo");
@@ -40,9 +39,7 @@ public class BookController implements Controller {
 
 				// 파라미터 받기
 				String book_code = (params.get("BOOK_CODE") != null) ? (String) params.get("BOOK_CODE") : null;
-				String classification_id = (params.get("CLASSIFICATION_ID") != null)
-						? (String) params.get("CLASSIFICATION_ID")
-						: null;
+				String classification_id = (params.get("CLASSIFICATION_ID") != null)? (String) params.get("CLASSIFICATION_ID"): null;
 				String book_author = (params.get("BOOK_AUTHOR") != null) ? (String) params.get("BOOK_AUTHOR") : null;
 				String book_name = (params.get("BOOK_NAME") != null) ? (String) params.get("BOOK_NAME") : null;
 				String publisher = (params.get("PUBLISHER") != null) ? (String) params.get("PUBLISHER") : null;
@@ -52,10 +49,10 @@ public class BookController implements Controller {
 
 				// 유효성 검증
 				boolean isOk = isValid(bookDTO);
-//				System.out.println("[No-1 회원가입] : 유효성 검증 확인 : " + isOk);
 
 				if (!isOk) {
 					response.put("status", false);
+					response.put("message", "유효성 검증 실패 - 입력값 확인 필요");
 					return response;
 				}
 
@@ -63,7 +60,7 @@ public class BookController implements Controller {
 				boolean isSuccess = bookService.bookJoin(bookDTO);
 				if (isSuccess) {
 					response.put("status", isSuccess);
-//					response.put("message", "회원가입 성공");
+					response.put("message", "Insert 성공");
 				}
 			}
 				break;
@@ -177,27 +174,66 @@ public class BookController implements Controller {
 	}
 
 	// 유효성 검사를 위한 메서드
+	// 유효성 검사를 위한 메서드
 	private boolean isValid(BookDTO bookDTO) {
-		if (bookDTO.getBOOK_CODE() == null || bookDTO.getBOOK_CODE().length() <= 5) {
-			response.put("ERROR", "BOOK_CODE는 5자 이상이어야 합니다.");
-			return false;
-		}
 
-		// ISRESERVE 유효성 검사 (숫자 0 또는 1만 허용)
-		try {
-			int isreserve = Integer.parseInt(bookDTO.getISRESERVE());
-			if (isreserve != 0 && isreserve != 1) {
-				response.put("ERROR", "ISRESERVE는 0 또는 1이어야 합니다.");
-				return false;
-			}
-		} catch (NumberFormatException e) {
-			response.put("ERROR", "ISRESERVE는 숫자 형식이어야 합니다.");
-			return false;
-		}
+	    // BOOK_CODE: null 체크 + 길이 + 숫자 여부
+	    if (bookDTO.getBOOK_CODE() == null || bookDTO.getBOOK_CODE().length() < 4) {
+	        response.put("ERROR", "BOOK_CODE는 4자 이상으로 입력해야 합니다.");
+	        return false;
+	    }
+	    try {
+	        Integer.parseInt(bookDTO.getBOOK_CODE()); // 숫자인지 확인
+	    } catch (NumberFormatException e) {
+	        response.put("ERROR", "BOOK_CODE는 숫자 형식이어야 합니다.");
+	        return false;
+	    }
 
-		return true;
+	    // CLASSIFICATION_ID: null 또는 숫자 형식인지 확인
+	    if (bookDTO.getCLASSIFICATION_ID() == null) {
+	        response.put("ERROR", "CLASSIFICATION_ID가 필요합니다.");
+	        return false;
+	    }
+	    try {
+	        Integer.parseInt(bookDTO.getCLASSIFICATION_ID());
+	    } catch (NumberFormatException e) {
+	        response.put("ERROR", "CLASSIFICATION_ID는 숫자 형식이어야 합니다.");
+	        return false;
+	    }
+
+	    // ISRESERVE: 0 또는 1이어야 하고 숫자 형식이어야 함
+	    if (bookDTO.getISRESERVE() == null) {
+	        response.put("ERROR", "ISRESERVE 값이 필요합니다.");
+	        return false;
+	    }
+	    try {
+	        int isreserve = Integer.parseInt(bookDTO.getISRESERVE());
+	        if (isreserve != 0 && isreserve != 1) {
+	            response.put("ERROR", "ISRESERVE는 0 또는 1이어야 합니다.");
+	            return false;
+	        }
+	    } catch (NumberFormatException e) {
+	        response.put("ERROR", "ISRESERVE는 숫자 형식이어야 합니다.");
+	        return false;
+	    }
+
+	    // BOOK_NAME, BOOK_AUTHOR, PUBLISHER 등 기본 값 체크 (옵션)
+	    if (bookDTO.getBOOK_NAME() == null || bookDTO.getBOOK_NAME().trim().isEmpty()) {
+	        response.put("ERROR", "BOOK_NAME은 필수 입력입니다.");
+	        return false;
+	    }
+	    if (bookDTO.getBOOK_AUTHOR() == null || bookDTO.getBOOK_AUTHOR().trim().isEmpty()) {
+	        response.put("ERROR", "BOOK_AUTHOR는 필수 입력입니다.");
+	        return false;
+	    }
+	    if (bookDTO.getPUBLISHER() == null || bookDTO.getPUBLISHER().trim().isEmpty()) {
+	        response.put("ERROR", "PUBLISHER는 필수 입력입니다.");
+	        return false;
+	    }
+
+	    return true;
 	}
-	
+
 
 	// 예외 처리를 위한 메서드
 	public Map<String, Object> exceptionHandler(Exception e) {

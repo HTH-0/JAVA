@@ -8,7 +8,7 @@ public class FrontController {
 	
 	private static FrontController instance;
 	private FrontController() {
-		System.out.println("[FC] FrontController init...");
+		System.out.println("[서비스] BookServiceImpl 초기화 완료.");
 		init();
 	}
 	

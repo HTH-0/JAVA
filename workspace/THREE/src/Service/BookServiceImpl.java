@@ -13,7 +13,7 @@ public class BookServiceImpl {
 
 	private BookServiceImpl() throws ClassNotFoundException {
 		bookDAO = BookDAOImpl.getInstance();
-		System.out.println("[Service] BookServiceImpl init.." );
+		System.out.println("[서비스] BookServiceImpl 연결 준비 완료." );
 	}
 
 	public static BookServiceImpl getInstance() throws ClassNotFoundException {

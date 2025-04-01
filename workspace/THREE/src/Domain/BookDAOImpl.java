@@ -18,7 +18,7 @@ public class BookDAOImpl implements BookDAO {
 
 	private BookDAOImpl() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		System.out.println("BookDAOImpl DB Driver Loaded");
+		System.out.println("[DB] BookDAOImpl DB Driver 로딩 완료.");
 	}
 
 	public static BookDAO getInstance() throws ClassNotFoundException {
@@ -34,17 +34,21 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public int insert(BookDTO bookDTO) throws Exception {
+		Connection conn = getConnection();
+		conn.setAutoCommit(true);
 		String sql = "INSERT INTO book_tbl VALUES (?, ?, ?, ?, ?, ?)";
-		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, bookDTO.getBOOK_CODE());
-			pstmt.setString(2, bookDTO.getCLASSIFICATION_ID());
+		try (
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, Integer.parseInt(bookDTO.getBOOK_CODE()));
+			pstmt.setInt(2, Integer.parseInt(bookDTO.getCLASSIFICATION_ID()));
 			pstmt.setString(3, bookDTO.getBOOK_AUTHOR());
 			pstmt.setString(4, bookDTO.getBOOK_NAME());
 			pstmt.setString(5, bookDTO.getPUBLISHER());
-			pstmt.setString(6, bookDTO.getISRESERVE());
+			pstmt.setInt(6, Integer.parseInt(bookDTO.getISRESERVE()));
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.err.println("도서 등록 중 오류 발생: " + e.getMessage());
 			throw new SQLException("BookDAO's INSERT SQL EXCEPTION !!");
 		}
 	}
@@ -85,14 +89,9 @@ public class BookDAOImpl implements BookDAO {
 			pstmt.setString(1, bookDTO.getBOOK_CODE());
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					return new BookDTO(
-						rs.getString("BOOK_CODE"),
-						rs.getString("CLASSIFICATION_ID"),
-						rs.getString("BOOK_AUTHOR"),
-						rs.getString("BOOK_NAME"),
-						rs.getString("PUBLISHER"),
-						rs.getString("ISRESERVE")
-					);
+					return new BookDTO(rs.getString("BOOK_CODE"), rs.getString("CLASSIFICATION_ID"),
+							rs.getString("BOOK_AUTHOR"), rs.getString("BOOK_NAME"), rs.getString("PUBLISHER"),
+							rs.getString("ISRESERVE"));
 				}
 			}
 		} catch (Exception e) {
@@ -105,16 +104,13 @@ public class BookDAOImpl implements BookDAO {
 	public List<BookDTO> selectAll() {
 		List<BookDTO> list = new ArrayList<>();
 		String sql = "SELECT * FROM book_tbl ORDER BY BOOK_CODE";
-		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+		try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
-				BookDTO dto = new BookDTO(
-					rs.getString("BOOK_CODE"),
-					rs.getString("CLASSIFICATION_ID"),
-					rs.getString("BOOK_AUTHOR"),
-					rs.getString("BOOK_NAME"),
-					rs.getString("PUBLISHER"),
-					rs.getString("ISRESERVE")
-				);
+				BookDTO dto = new BookDTO(rs.getString("BOOK_CODE"), rs.getString("CLASSIFICATION_ID"),
+						rs.getString("BOOK_AUTHOR"), rs.getString("BOOK_NAME"), rs.getString("PUBLISHER"),
+						rs.getString("ISRESERVE"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
