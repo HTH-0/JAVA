@@ -9,7 +9,6 @@ import Controller.FrontController;
 import Domain.BookDTO;
 
 public class Viewer {
-
 	private Scanner sc = new Scanner(System.in);
 
 	private FrontController controller;
@@ -95,6 +94,7 @@ public class Viewer {
 
 	public void Insert() {
 		System.out.println("------------INSERT--------------");
+		System.out.println("BOOK_CODE는 5자 이상으로 입력.");
 		System.out.print("BOOK_CODE : ");
 		String book_code = sc.next();
 		System.out.print("CLASSIFICATION_ID : ");
@@ -164,15 +164,37 @@ public class Viewer {
 		System.out.println("------------SELECT--------------");
 		System.out.print("BOOK_CODE : ");
 		String book_code = sc.next();
+
 		Map<String, Object> params = new HashMap<>();
 		params.put("endPoint", "/book");
 		params.put("serviceNo", 3);
 		params.put("BOOK_CODE", book_code);
+
 		Map<String, Object> response = controller.execute(params);
 
-		for (String key : response.keySet())
-			System.out.println(key + " : " + response.get(key));
+		// 에러 메시지 출력
+		if (response.containsKey("ERROR")) {
+			System.err.println("오류: " + response.get("ERROR"));
+			return;
+		}
+
+		if (response.containsKey("status") && (Boolean) response.get("status")) {
+			// BookDTO 받아서 출력
+			BookDTO book = (BookDTO) response.get("book");
+
+			System.out.println("-------- 도서 상세 정보 --------");
+			System.out.printf("%-15s : %s\n", "BOOK_CODE", book.getBOOK_CODE());
+			System.out.printf("%-15s : %s\n", "CLASSIFICATION_ID", book.getCLASSIFICATION_ID());
+			System.out.printf("%-15s : %s\n", "BOOK_AUTHOR", book.getBOOK_AUTHOR());
+			System.out.printf("%-15s : %s\n", "BOOK_NAME", book.getBOOK_NAME());
+			System.out.printf("%-15s : %s\n", "PUBLISHER", book.getPUBLISHER());
+			System.out.printf("%-15s : %s\n", "ISRESERVE", book.getISRESERVE().equals("1") ? "예약됨" : "미예약");
+			System.out.println("--------------------------------");
+		} else {
+			System.out.println("조회 실패: " + response.get("message"));
+		}
 	}
+
 
 	public void SelectAll() {
 		System.out.println("------------SELECT ALL--------------");
