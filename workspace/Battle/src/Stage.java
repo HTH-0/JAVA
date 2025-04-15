@@ -6,9 +6,9 @@ public class Stage {
 	private List<Enemy> enemyList;
 	
 	// 생성자
-	public Stage(String stagenumber, List<Enemy> enemylist) {
+	public Stage(String stagenumber, List<Enemy> enemyList) {
 		this.stageNumber = stagenumber;
-		this.enemyList = new ArrayList<>(enemyList);
+		this.enemyList = (enemyList != null) ? new ArrayList<>(enemyList) : new ArrayList<>();
 	}
 	
 	// Getter ( Stage 내용은 수정하지 않기 때문에 Setter 제외 )

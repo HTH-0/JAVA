@@ -64,8 +64,10 @@ public class Enemy {
 
 	
 	// Enemy 들의 템플릿들. 각 스테이지에 원하는만큼 복사해서 사용
-	public static final Enemy enemyA = new Enemy("enemyA", 100, 10, 10);
-	public static final Enemy enemyB = new Enemy("enemyB", 200, 20, 20);
-	public static final Enemy enemyC = new Enemy("enemyC", 500, 30, 30);
-	public static final Enemy enemyD = new Enemy("enemyD", 1000, 40, 40);
+	public static final Enemy enemyA = new Enemy("enemyA", 100, 10, 5);
+	public static final Enemy enemyB = new Enemy("enemyB", 200, 20, 10);
+	public static final Enemy enemyC = new Enemy("enemyC", 500, 30, 15);
+	public static final Enemy enemyD = new Enemy("enemyD", 1000, 40, 20);
+	public static final Enemy enemyE = new Enemy("enemyE", 1500, 50, 25);
+	public static final Enemy enemyF = new Enemy("enemyF", 2000, 60, 30);
 }
