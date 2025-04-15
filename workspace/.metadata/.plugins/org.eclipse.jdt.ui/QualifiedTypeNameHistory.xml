@@ -49,4 +49,5 @@
     <fullyQualifiedTypeName name="Domain.BookDAOImpl"/>
     <fullyQualifiedTypeName name="Service.BookServiceImpl"/>
     <fullyQualifiedTypeName name="Domain.BookDTO"/>
+    <fullyQualifiedTypeName name="Stage"/>
 </qualifiedTypeNameHistroy>
