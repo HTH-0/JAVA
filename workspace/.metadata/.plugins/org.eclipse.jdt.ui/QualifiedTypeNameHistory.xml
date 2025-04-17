@@ -50,4 +50,5 @@
     <fullyQualifiedTypeName name="Service.BookServiceImpl"/>
     <fullyQualifiedTypeName name="Domain.BookDTO"/>
     <fullyQualifiedTypeName name="Stage"/>
+    <fullyQualifiedTypeName name="Player"/>
 </qualifiedTypeNameHistroy>
